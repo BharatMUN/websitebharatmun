@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BharatMUN — Empowering Diplomacy, Exhibiting Diligence</title>
+<title>BharatMUN</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAAgACADASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAABgcIAP/EACkQAAEDAgUCBgMAAAAAAAAAAAECAwQFEQAGBxIxEyEIIjJBUWEWcZH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EACMRAAIBAgYCAwAAAAAAAAAAAAERAAIDBBIUITFBEyJRkcH/2gAMAwEAAhEDEQA/AIywaM5OpsjTFzOLVd2vRl9GRCLO49UrskBVxYFJB4Pv+sC1FiNz6xDhOuOttvvobWtpkurSlSgCUoBBUQD2TcX4xecLQnJFC0+fyXLz5T2mpCVtyXnUtIWp4+pQCnLBQIFh7bR8XwN6m8V4gSXuviXYHTOvUkAZSm+euP3aQDjYeGr/AIf/AMCjSqq1n2hVOjMPCOp1AWX2n1AlDbrbYXsuEq81/bgGwK/1JoeVMvCkwcvV5yvS3YLcmdLQ3046VuJCg0hKgF+UclVib+kcYaoGkoiRBHuDNJnzKVVItTp76mJkR5D7DqQCULSQpKhft2IBxZuiWt7CNIICq3SY1TdpKHUTJkt3e4SlRXuN0kk7Sn5J+8RRghy5miVRaBWqQ22HGqmyG/MezZ4JA+0kj+fGDuZ16FGS4qi7VQrRRY+u+Yw/ERrfO1IfRR6RBYouW45BEaMNhlKHCnbWBCTfamwtcnk9k3jY2E37lACCn//Z">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -483,7 +483,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
 .social-link:hover{background:var(--saffron);border-color:var(--saffron);transform:translateY(-2px)}
 .avail{display:flex;align-items:center;gap:8px;font-size:.72rem;color:var(--muted)}
 .avail-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:pulse-dot 2s ease-in-out infinite}
-.footer-tricolor{display:flex;height:2px;width:100px;overflow:hidden;margin-top:4px}
+.footer-tricolor{display:flex;height:2px;width:100px;overflow:hidden;margin:4px auto 0}
 .ft-s{flex:1;background:var(--saffron)}
 .ft-w{flex:1;background:#fff}
 .ft-g{flex:1;background:var(--green)}
@@ -670,17 +670,31 @@ body:has(button:hover) #cursor{width:18px;height:18px}
 .impact-body p:last-child{margin-bottom:0}
 .impact-body strong{color:var(--text);font-weight:600}
 .impact-images{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+.impact-img-wrap{display:flex;flex-direction:column;gap:0}
 .impact-img-slot{
-  aspect-ratio:4/3;border-radius:12px;overflow:hidden;
-  background:var(--surface);border:1px solid var(--stroke);
+  aspect-ratio:4/3;border-radius:12px 12px 0 0;overflow:hidden;
+  background:var(--surface);border:1px solid var(--stroke);border-bottom:none;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   gap:10px;position:relative;transition:border-color .2s;
 }
-.impact-img-slot:hover{border-color:rgba(255,153,51,.3)}
+.impact-img-wrap:hover .impact-img-slot{border-color:rgba(255,153,51,.3)}
+.impact-img-wrap:hover .impact-img-caption{border-color:rgba(255,153,51,.3)}
 .impact-img-slot img{width:100%;height:100%;object-fit:cover}
 .impact-img-slot .slot-icon{font-size:2rem;opacity:.18}
 .impact-img-slot .slot-label{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
 .impact-img-slot .slot-hint{font-size:.62rem;color:rgba(255,153,51,.5);letter-spacing:.1em}
+.impact-img-caption{
+  background:var(--surface);border:1px solid var(--stroke);border-top:none;
+  border-radius:0 0 12px 12px;
+  padding:10px 14px;transition:border-color .2s;
+}
+.impact-img-caption .cap-title{
+  font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--text);
+}
+.impact-img-caption .cap-sub{
+  font-size:.62rem;color:var(--muted);margin-top:2px;letter-spacing:.03em;
+}
 
 /* ═══════════════════════════════════
    PAGE 5: TEAM
@@ -1362,12 +1376,12 @@ body:has(button:hover) #cursor{width:18px;height:18px}
     <div class="contact-inner">
       <div class="contact-cta reveal">
         <span class="contact-eyebrow">Ready to Debate?</span>
-        <h2 class="contact-title">Join<br><em>BharatMUN</em><br>4.0</h2>
+        <h2 class="contact-title">Join<br><em>BharatMUN</em><br>Chapter 4.0</h2>
         <a href="https://forms.gle/3WCqnBDPu6uppiEj6" target="_blank" class="contact-email">Register for Chapter 4.0 ↗</a>
       </div>
       <div class="footer-bar reveal">
         <div>
-          <div style="font-family:var(--font-display);font-size:1.4rem;letter-spacing:1px;margin-bottom:4px">
+          <div style="font-family:var(--font-display);font-size:1.4rem;letter-spacing:1px;margin-bottom:4px;text-align:center">
             <span style="color:var(--saffron)">BHARAT</span><span style="color:var(--green)">MUN</span>
           </div>
           <div class="footer-tricolor"><span class="ft-s"></span><span class="ft-w"></span><span class="ft-g"></span></div>
@@ -1375,7 +1389,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
         <div class="avail"><span class="avail-dot"></span><span>Registrations open · August 2026</span></div>
         <div class="footer-social">
           <a href="https://www.instagram.com/bharatmunofficial" target="_blank" class="social-link" title="Instagram">📷</a>
-          <a href="https://ink.bio/BharatMUN" target="_blank" class="social-link" title="Links">🔗</a>
+          <a href="https://www.linkedin.com/company/bharatmun/" target="_blank" class="social-link" title="LinkedIn">🔗</a>
           <a href="https://forms.gle/3WCqnBDPu6uppiEj6" target="_blank" class="social-link" title="Register">✍️</a>
         </div>
       </div>
@@ -1415,10 +1429,6 @@ body:has(button:hover) #cursor{width:18px;height:18px}
         <div class="detail-row">
           <span class="d-icon">🏛️</span>
           <div><div class="d-label">Committees</div><div class="d-val">12 Committees — UNGA, UNW, UNHRC, UNODC, UNEP, WTO, UEFA, AIPPM, IWC, FIA, UNOOSA, International Press</div></div>
-        </div>
-        <div class="detail-row">
-          <span class="d-icon">👥</span>
-          <div><div class="d-label">Format</div><div class="d-val">Two-day residential conference with opening & closing ceremonies</div></div>
         </div>
       </div>
     </div>
@@ -1583,31 +1593,27 @@ body:has(button:hover) #cursor{width:18px;height:18px}
           <div class="conf-moments-label">Conference Teasers</div>
           <div class="conf-gallery" style="grid-template-columns:repeat(2,1fr);">
             <!-- Teaser 1 -->
-            <div class="conf-video-tile" style="padding:0;"
-              onmouseenter="var v=this.querySelector('video');v.muted=false;v.play();this.querySelector('.conf-video-thumb').style.opacity='0';"
-              onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.muted=true;this.querySelector('.conf-video-thumb').style.opacity='1';">
+            <div class="conf-video-tile" style="padding:0;cursor:pointer;"
+              onclick="playVideoFullscreen(this)">
               <img class="conf-video-thumb" src="thumbnail1.png" alt="Teaser 1 Thumbnail"
                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s;z-index:2;">
-              <video muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
+              <video loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
                 <source src="teaser1.mp4" type="video/mp4">
               </video>
-              <div class="conf-video-overlay" style="z-index:3;">
+              <div class="conf-video-overlay" style="z-index:3;transition:opacity .3s;">
                 <span class="conf-play-btn" style="pointer-events:none;">▶</span>
-                <span class="conf-video-lbl">Teaser 1</span>
               </div>
             </div>
             <!-- Teaser 2 -->
-            <div class="conf-video-tile" style="padding:0;"
-              onmouseenter="var v=this.querySelector('video');v.muted=false;v.play();this.querySelector('.conf-video-thumb').style.opacity='0';"
-              onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.muted=true;this.querySelector('.conf-video-thumb').style.opacity='1';">
+            <div class="conf-video-tile" style="padding:0;cursor:pointer;"
+              onclick="playVideoFullscreen(this)">
               <img class="conf-video-thumb" src="thumbnail2.png" alt="Teaser 2 Thumbnail"
                 style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s;z-index:2;">
-              <video muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
+              <video loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
                 <source src="teaser2.mp4" type="video/mp4">
               </video>
-              <div class="conf-video-overlay" style="z-index:3;">
+              <div class="conf-video-overlay" style="z-index:3;transition:opacity .3s;">
                 <span class="conf-play-btn" style="pointer-events:none;">▶</span>
-                <span class="conf-video-lbl">Teaser 2</span>
               </div>
             </div>
           </div>
@@ -1640,16 +1646,16 @@ body:has(button:hover) #cursor{width:18px;height:18px}
           <div class="conf-moments-label">Conference Moments</div>
 <div class="conf-gallery">
   <div class="conf-photo">
-    <img src="ch3-photo1.HEIC" alt="Chapter 3.0 Moment 1">
+    <img src="ch3-photo1.jpeg" alt="Chapter 3.0 Moment 1">
   </div>
   <div class="conf-photo">
     <img src="ch3-photo2.jpg" alt="Chapter 3.0 Moment 2">
   </div>
   <div class="conf-photo">
-    <img src="ch3-photo3.HEIC" alt="Chapter 3.0 Moment 3">
+    <img src="ch3-photo3.jpeg" alt="Chapter 3.0 Moment 3">
   </div>
   <div class="conf-photo">
-    <img src="ch3-photo4.HEIC" alt="Chapter 3.0 Moment 4">
+    <img src="ch3-photo4.jpeg" alt="Chapter 3.0 Moment 4">
   </div>
 </div>
           <div class="conf-btns">
@@ -1680,17 +1686,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
           <div class="conf-moments-label">Conference Aftermovie</div>
           <div class="conf-gallery" style="grid-template-columns:repeat(2,1fr);">
           <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--surface2);border:1px solid var(--stroke);cursor:pointer;"
-            onmouseenter="
-              this.querySelector('video').play();
-              this.querySelector('.am-thumb').style.opacity='0';
-              this.querySelector('.am-overlay').style.opacity='0';
-            "
-            onmouseleave="
-              var v=this.querySelector('video');
-              v.pause(); v.currentTime=0;
-              this.querySelector('.am-thumb').style.opacity='1';
-              this.querySelector('.am-overlay').style.opacity='1';
-            ">
+            onclick="playVideoFullscreen(this)">
             <img class="am-thumb" src="aftermovie-ch2-thumb.png" alt="Chapter 2.0 Aftermovie"
               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:opacity .35s ease;">
             <video loop playsinline
@@ -1700,7 +1696,6 @@ body:has(button:hover) #cursor{width:18px;height:18px}
             <div class="am-overlay"
               style="position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(9,9,9,.45);backdrop-filter:blur(2px);transition:opacity .35s ease;pointer-events:none;">
               <div class="media-play-icon" style="width:64px;height:64px;font-size:1.6rem;">▶</div>
-              <span class="media-video-label">Aftermovie — hover to play</span>
             </div>
           </div>
           </div><!-- end conf-gallery grid -->
@@ -1762,7 +1757,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
             <div class="mission-card"><div class="m-icon">🌏</div><div class="m-title">Inclusivity</div><div class="m-body">Reaching every corner of India, urban and rural alike.</div></div>
             <div class="mission-card"><div class="m-icon">🎓</div><div class="m-title">Excellence</div><div class="m-body">Highest academic standards in every committee.</div></div>
             <div class="mission-card"><div class="m-icon">🤝</div><div class="m-title">Leadership</div><div class="m-body">Building tomorrow's global changemakers today.</div></div>
-            <div class="mission-card"><div class="m-icon">🇮🇳</div><div class="m-title">Heritage</div><div class="m-body">Rooted in India, ready for the world stage.</div></div>
+            <div class="mission-card"><div class="m-icon">🪔</div><div class="m-title">Heritage</div><div class="m-body">Rooted in India, ready for the world stage.</div></div>
           </div>
         </div>
       </div>
@@ -1794,7 +1789,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
         <div>
           <div class="founder-portrait-wrap">
             <div class="founder-portrait">
-              <img src="rishaan.png" alt="Rishaan Sahgal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <img src="rishaan.jpeg" alt="Rishaan Sahgal" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="founder-portrait-placeholder" style="display:none"><span class="fpp-icon">👤</span><span class="fpp-text">Photo Placeholder</span></div>
             </div>
             <div class="founder-plate"><h3>Rishaan Sahgal</h3><p>Founder &amp; President</p></div>
@@ -1827,28 +1822,46 @@ body:has(button:hover) #cursor{width:18px;height:18px}
 
       <!-- Image placeholders — replace src with your local image paths -->
       <div class="impact-images reveal reveal-d2">
-        <div class="impact-img-slot">
-          <img src="impact-1.jpg" alt="Impact image 1" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-          <div style="display:none;text-align:center">
-            <div class="slot-icon">🖼️</div>
-            <div class="slot-label">Image 1</div>
-            <div class="slot-hint">replace src="impact-1.jpg"</div>
+        <div class="impact-img-wrap">
+          <div class="impact-img-slot">
+            <img src="udayan care.jpg" alt="udayan care" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <div style="display:none;text-align:center">
+              <div class="slot-icon">🖼️</div>
+              <div class="slot-label">Image 1</div>
+              <div class="slot-hint">replace src="udayan.jpg"</div>
+            </div>
+          </div>
+          <div class="impact-img-caption">
+            <div class="cap-title">Udayan Care</div>
+            <div class="cap-sub">Session with Udayan Care Home for Girls</div>
           </div>
         </div>
-        <div class="impact-img-slot">
-          <img src="impact-2.jpg" alt="Impact image 2" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-          <div style="display:none;text-align:center">
-            <div class="slot-icon">🖼️</div>
-            <div class="slot-label">Image 2</div>
-            <div class="slot-hint">replace src="impact-2.jpg"</div>
+        <div class="impact-img-wrap">
+          <div class="impact-img-slot">
+            <img src="Samidha welfare.jpg" alt="Samidha welfare" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <div style="display:none;text-align:center">
+              <div class="slot-icon">🖼️</div>
+              <div class="slot-label">Image 2</div>
+              <div class="slot-hint">replace src="Samidha welfare.jpg"</div>
+            </div>
+          </div>
+          <div class="impact-img-caption">
+            <div class="cap-title">Samidha Welfare Foundation</div>
+            <div class="cap-sub">Session with Samidha Welfare Foundation</div>
           </div>
         </div>
-        <div class="impact-img-slot">
-          <img src="impact-3.jpg" alt="Impact image 3" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-          <div style="display:none;text-align:center">
-            <div class="slot-icon">🖼️</div>
-            <div class="slot-label">Image 3</div>
-            <div class="slot-hint">replace src="impact-3.jpg"</div>
+        <div class="impact-img-wrap">
+          <div class="impact-img-slot">
+            <img src="Uemmeed foundation.jpg" alt="Uemmeed foundation" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <div style="display:none;text-align:center">
+              <div class="slot-icon">🖼️</div>
+              <div class="slot-label">Image 3</div>
+              <div class="slot-hint">replace src="Uemmeed foundation.jpg"</div>
+            </div>
+          </div>
+          <div class="impact-img-caption">
+            <div class="cap-title">Umeed Foundation</div>
+            <div class="cap-sub">Survey and Awareness Drive with Umeed Foundation</div>
           </div>
         </div>
       </div>
@@ -1954,7 +1967,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
 
         <div class="team-card">
           <div class="team-photo">
-            <img src="suryansh.HEIC" alt="Suryansh Tomar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <img src="suryansh.jpeg" alt="Suryansh Tomar" onerror="this.onerror=null;this.src='suryansh.jpg';" style="width:100%;height:100%;object-fit:cover;">
             <div class="team-photo-placeholder" style="display:none;width:100%;height:100%;align-items:center;justify-content:center">👤</div>
           </div>
           <div class="team-info"><div class="team-name">Suryansh Tomar</div><div class="team-role">HOD Sponsorships &amp; Media</div></div>
@@ -2033,31 +2046,27 @@ body:has(button:hover) #cursor{width:18px;height:18px}
       <div class="media-sec-label">Conference Teasers</div>
       <div class="media-video-grid">
         <!-- Teaser 1 -->
-        <div class="media-video-item" style="cursor:default;"
-          onmouseenter="var v=this.querySelector('video');v.muted=false;v.play();this.querySelector('.media-thumb').style.opacity='0';"
-          onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.muted=true;this.querySelector('.media-thumb').style.opacity='1';">
+        <div class="media-video-item" style="cursor:pointer;"
+          onclick="playVideoFullscreen(this)">
           <img class="media-thumb" src="thumbnail1.png" alt="Teaser 1 Thumbnail"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s;z-index:2;">
-          <video muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
+          <video loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
             <source src="teaser1.mp4" type="video/mp4">
           </video>
           <div class="media-video-ph" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;z-index:3;background:rgba(9,9,9,.45);backdrop-filter:blur(2px);transition:opacity .3s;" id="media-overlay-1">
             <div class="media-play-icon">▶</div>
-            <span class="media-video-label">Teaser 1</span>
           </div>
         </div>
         <!-- Teaser 2 -->
-        <div class="media-video-item" style="cursor:default;"
-          onmouseenter="var v=this.querySelector('video');v.muted=false;v.play();this.querySelector('.media-thumb').style.opacity='0';"
-          onmouseleave="var v=this.querySelector('video');v.pause();v.currentTime=0;v.muted=true;this.querySelector('.media-thumb').style.opacity='1';">
+        <div class="media-video-item" style="cursor:pointer;"
+          onclick="playVideoFullscreen(this)">
           <img class="media-thumb" src="thumbnail2.png" alt="Teaser 2 Thumbnail"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s;z-index:2;">
-          <video muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
+          <video loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
             <source src="teaser2.mp4" type="video/mp4">
           </video>
           <div class="media-video-ph" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;z-index:3;background:rgba(9,9,9,.45);backdrop-filter:blur(2px);transition:opacity .3s;" id="media-overlay-2">
             <div class="media-play-icon">▶</div>
-            <span class="media-video-label">Teaser 2</span>
           </div>
         </div>
       </div>
@@ -2069,16 +2078,16 @@ body:has(button:hover) #cursor{width:18px;height:18px}
       <div class="media-sec-label">Photos</div>
       <div class="media-photo-grid">
   <div class="media-photo-item">
-    <img src="ch3-photo7.HEIC" alt="Chapter 3.0 Photo 1" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+    <img src="ch3-photo7.jpeg" alt="Chapter 3.0 Photo 1" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
   </div>
   <div class="media-photo-item">
     <img src="ch3-photo8.jpg" alt="Chapter 3.0 Photo 2" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
   </div>
   <div class="media-photo-item">
-    <img src="ch3-photo9.HEIC" alt="Chapter 3.0 Photo 3" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+    <img src="ch3-photo9.jpeg" alt="Chapter 3.0 Photo 3" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
   </div>
   <div class="media-photo-item">
-    <img src="chp3-photo10.HEIC" alt="Chapter 3.0 Photo 4" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
+    <img src="chp3-photo10.jpeg" alt="Chapter 3.0 Photo 4" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
   </div>
   <div class="media-photo-item">
     <img src="ch3-photo5.jpg" alt="Chapter 3.0 Photo 5" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">
@@ -2089,33 +2098,20 @@ body:has(button:hover) #cursor{width:18px;height:18px}
 </div>
       <div class="media-sec-label">Videos</div>
       <div class="media-video-grid" style="grid-template-columns:1fr;">
-        <div class="media-video-item" style="cursor:default;"
-          onmouseenter="
-            var v=this.querySelector('video');
-            v.muted=false;
-            v.play();
-            this.querySelector('.ch3-am-thumb').style.opacity='0';
-            this.querySelector('.ch3-am-overlay').style.opacity='0';
-          "
-          onmouseleave="
-            var v=this.querySelector('video');
-            v.pause(); v.currentTime=0; v.muted=true;
-            this.querySelector('.ch3-am-thumb').style.opacity='1';
-            this.querySelector('.ch3-am-overlay').style.opacity='1';
-          ">
+        <div class="media-video-item" style="cursor:pointer;"
+          onclick="playVideoFullscreen(this)">
           <!-- Static thumbnail — replace aftermovie-ch3-thumb.jpg with your actual thumbnail -->
           <img class="ch3-am-thumb" src="aftermovie-ch3-thumb.png" alt="Chapter 3.0 Aftermovie Thumbnail"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:opacity .35s ease;">
-          <!-- Video — plays with audio on hover -->
+          <!-- Video — plays with audio on click -->
           <video loop playsinline muted
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
             <source src="BharatMUN Chapter 3.0 - Aftermovie.mp4" type="video/mp4">
           </video>
-          <!-- Play icon overlay (shown at rest, hidden on hover) -->
+          <!-- Play icon overlay (shown at rest, hidden on click) -->
           <div class="ch3-am-overlay"
             style="position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(9,9,9,.45);backdrop-filter:blur(2px);transition:opacity .35s ease;pointer-events:none;">
             <div class="media-play-icon" style="width:64px;height:64px;font-size:1.6rem;">▶</div>
-            <span class="media-video-label">Aftermovie — hover to play</span>
           </div>
         </div>
       </div>
@@ -2127,21 +2123,11 @@ body:has(button:hover) #cursor{width:18px;height:18px}
       <div class="media-sec-label">Aftermovie</div>
       <div style="max-width:900px;">
         <div class="media-video-item" style="width:100%;aspect-ratio:16/9;cursor:pointer;"
-          onmouseenter="
-            this.querySelector('video').play();
-            this.querySelector('.am-thumb').style.opacity='0';
-            this.querySelector('.am-overlay').style.opacity='0';
-          "
-          onmouseleave="
-            var v=this.querySelector('video');
-            v.pause(); v.currentTime=0;
-            this.querySelector('.am-thumb').style.opacity='1';
-            this.querySelector('.am-overlay').style.opacity='1';
-          ">
+          onclick="playVideoFullscreen(this)">
           <!-- Static thumbnail — place your thumbnail image as aftermovie-ch2-thumb.jpg -->
           <img class="am-thumb" src="aftermovie-ch2-thumb.png" alt="Chapter 2.0 Aftermovie"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:opacity .35s ease;">
-          <!-- Video (with audio — plays on hover) -->
+          <!-- Video (with audio — plays on click) -->
           <video loop playsinline
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
             <source src="BharatMUN Chapter 2.0 - AfterMovie.mp4" type="video/mp4">
@@ -2150,7 +2136,6 @@ body:has(button:hover) #cursor{width:18px;height:18px}
           <div class="am-overlay"
             style="position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(9,9,9,.45);backdrop-filter:blur(2px);transition:opacity .35s ease;pointer-events:none;">
             <div class="media-play-icon" style="width:64px;height:64px;font-size:1.6rem;">▶</div>
-            <span class="media-video-label">Aftermovie — hover to play</span>
           </div>
         </div>
       </div>
@@ -2469,6 +2454,55 @@ function switchMediaTab(tabId){
     }
   });
   window.scrollTo(0,0);
+}
+
+/* ── Video: click to play fullscreen ── */
+function playVideoFullscreen(container) {
+  var video = container.querySelector('video');
+  if (!video) return;
+
+  // Unmute and play
+  video.muted = false;
+  video.currentTime = 0;
+  video.play();
+
+  // Hide the overlay and thumbnail
+  var overlays = container.querySelectorAll('.conf-video-overlay,.am-overlay,.ch3-am-overlay,.media-video-ph');
+  var thumbs   = container.querySelectorAll('.conf-video-thumb,.am-thumb,.ch3-am-thumb,.media-thumb');
+  overlays.forEach(function(el){ el.style.opacity = '0'; });
+  thumbs.forEach(function(el){ el.style.opacity = '0'; });
+
+  // Request fullscreen on the video element (cross-browser)
+  var req = video.requestFullscreen
+         || video.webkitRequestFullscreen
+         || video.mozRequestFullScreen
+         || video.msRequestFullscreen;
+  if (req) {
+    req.call(video).catch(function(){});
+  }
+
+  // When fullscreen exits, pause and restore thumbnail/overlay
+  function onFsChange() {
+    var fsEl = document.fullscreenElement
+            || document.webkitFullscreenElement
+            || document.mozFullScreenElement
+            || document.msFullscreenElement;
+    if (!fsEl) {
+      video.pause();
+      video.currentTime = 0;
+      video.muted = true;
+      overlays.forEach(function(el){ el.style.opacity = '1'; });
+      thumbs.forEach(function(el){ el.style.opacity = '1'; });
+      document.removeEventListener('fullscreenchange', onFsChange);
+      document.removeEventListener('webkitfullscreenchange', onFsChange);
+      document.removeEventListener('mozfullscreenchange', onFsChange);
+      document.removeEventListener('MSFullscreenChange', onFsChange);
+    }
+  }
+  document.addEventListener('fullscreenchange', onFsChange);
+  document.addEventListener('webkitfullscreenchange', onFsChange);
+  document.addEventListener('mozfullscreenchange', onFsChange);
+  document.addEventListener('MSFullscreenChange', onFsChange);
 }
 </script>
 </body>
