@@ -1,0 +1,22 @@
+{
+  "name": "websitebharatmun",
+  "version": "1.0.0",
+  "description": "BharatMUN — Empowering Diplomacy, Exhibiting Diligence",
+  "scripts": {
+    "test": "echo \"No tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BharatMUN/websitebharatmun.git"
+  },
+  "keywords": ["bharatmun", "mun", "diplomacy"],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BharatMUN/websitebharatmun/issues"
+  },
+  "homepage": "https://github.com/BharatMUN/websitebharatmun#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
