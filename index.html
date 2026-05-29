@@ -10,6 +10,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&family=League+Spartan:wght@700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Video Modal -->
+<div id="video-modal" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="vm-box">
+    <button class="vm-close" onclick="closeVideoModal()" aria-label="Close video">✕</button>
+    <video id="vm-video" controls playsinline></video>
+    <div class="vm-bar">
+      <span class="vm-label" id="vm-label">BharatMUN</span>
+      <span class="vm-hint">Press Esc to close</span>
+    </div>
+  </div>
+</div>
 
 <style>
 /* ═══════════════════════════════════════════════════
@@ -647,7 +658,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
 .founder-portrait-wrap{position:relative}
 .founder-portrait-wrap::before{content:'';position:absolute;inset:-10px;border:1px solid rgba(255,153,51,.2);border-radius:4px;transform:rotate(2deg)}
 .founder-portrait{width:100%;aspect-ratio:3/4;background:var(--surface2);border:1px solid var(--stroke);overflow:hidden;border-radius:2px;position:relative}
-.founder-portrait img{width:100%;height:100%;object-fit:cover}
+.founder-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top}
 .founder-portrait-placeholder{width:100%;height:100%;min-height:400px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
 .fpp-icon{font-size:4rem;opacity:.15}
 .fpp-text{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
@@ -780,6 +791,12 @@ body:has(button:hover) #cursor{width:18px;height:18px}
   .footer-bar{flex-direction:column;text-align:center;align-items:center}
   .committee-grid{grid-template-columns:1fr}
   .section-wrap,.venue-inner{padding-left:5%;padding-right:5%}
+  /* Founder portrait — show full image, no cropping */
+  #founder-section{padding:60px 5%}
+  .founder-grid{grid-template-columns:1fr;gap:32px}
+  .founder-portrait-wrap{max-width:100%;width:100%}
+  .founder-portrait{aspect-ratio:4/5}
+  .founder-portrait img{object-position:center 15%}
 }
 @media(max-width:480px){
   .countdown-strip{flex-direction:column;gap:16px;text-align:center}
@@ -788,6 +805,65 @@ body:has(button:hover) #cursor{width:18px;height:18px}
   .secretariat-grid{grid-template-columns:repeat(2,1fr)}
   .values-grid{grid-template-columns:1fr}
   .impact-images{grid-template-columns:1fr}
+}
+
+/* ═══════════════════════════════════
+   VIDEO MODAL (mini fullscreen)
+═══════════════════════════════════ */
+#video-modal{
+  position:fixed;inset:0;z-index:99990;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,0,0,0);
+  pointer-events:none;
+  transition:background .3s ease;
+}
+#video-modal.open{
+  background:rgba(0,0,0,.82);
+  pointer-events:all;
+}
+.vm-box{
+  position:relative;
+  width:min(70vw, 960px);
+  max-width:960px;
+  border-radius:16px;
+  overflow:hidden;
+  border:1px solid rgba(255,153,51,.3);
+  box-shadow:0 32px 80px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04);
+  transform:scale(.88) translateY(24px);
+  opacity:0;
+  transition:transform .35s cubic-bezier(.22,1,.36,1), opacity .35s ease;
+  background:#000;
+}
+#video-modal.open .vm-box{
+  transform:scale(1) translateY(0);
+  opacity:1;
+}
+.vm-box video{
+  display:block;width:100%;height:auto;
+  max-height:55vh;
+  object-fit:contain;
+  background:#000;
+}
+.vm-close{
+  position:absolute;top:12px;right:12px;z-index:2;
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.15);
+  color:#fff;font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,border-color .2s;
+  backdrop-filter:blur(6px);
+}
+.vm-close:hover{background:var(--saffron);border-color:var(--saffron);color:var(--bg)}
+.vm-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;background:rgba(17,17,17,.95);
+  border-top:1px solid rgba(255,255,255,.07);
+}
+.vm-label{font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.vm-hint{font-size:.58rem;color:rgba(255,153,51,.55);letter-spacing:.1em}
+@media(max-width:768px){
+  .vm-box{width:92vw}
+  .vm-box video{max-height:50vw}
 }
 
 /* ═══════════════════════════════════
@@ -1022,6 +1098,12 @@ body:has(button:hover) #cursor{width:18px;height:18px}
   /* Conference card body */
   .conf-body-inner{padding:0 20px 28px;padding-top:20px}
   .conf-gallery{grid-template-columns:repeat(2,1fr);gap:8px}
+  /* Teasers: single column, taller on mobile */
+  .conf-teaser-gallery{grid-template-columns:1fr !important;gap:12px !important}
+  .conf-teaser-gallery .conf-video-tile{aspect-ratio:16/10}
+  /* Aftermovie: single column, full-width on mobile */
+  .conf-aftermovie-gallery{grid-template-columns:1fr !important}
+  .conf-am-tile{aspect-ratio:16/10 !important}
   .conf-btns{flex-direction:column;gap:10px}
   .conf-btns .btn-solid,
   .conf-btns .btn-ghost{width:100%;justify-content:center;min-height:48px}
@@ -1591,7 +1673,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
             <a href="https://forms.gle/3WCqnBDPu6uppiEj6" target="_blank" class="btn-solid" style="font-size:.75rem;padding:12px 24px">Register Now →</a>
           </div>
           <div class="conf-moments-label">Conference Teasers</div>
-          <div class="conf-gallery" style="grid-template-columns:repeat(2,1fr);">
+          <div class="conf-gallery conf-teaser-gallery" style="grid-template-columns:repeat(2,1fr);">
             <!-- Teaser 1 -->
             <div class="conf-video-tile" style="padding:0;cursor:pointer;"
               onclick="playVideoFullscreen(this)">
@@ -1684,8 +1766,8 @@ body:has(button:hover) #cursor{width:18px;height:18px}
         <div class="conf-body-inner">
           <p class="conf-desc">Chapter 2.0 was where BharatMUN truly found its identity. Building on the foundation of our inaugural edition, we doubled the number of committees, brought in distinguished guest speakers, and created a more immersive delegate experience that defined our standard of excellence.</p>
           <div class="conf-moments-label">Conference Aftermovie</div>
-          <div class="conf-gallery" style="grid-template-columns:repeat(2,1fr);">
-          <div style="position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--surface2);border:1px solid var(--stroke);cursor:pointer;"
+          <div class="conf-gallery conf-aftermovie-gallery" style="grid-template-columns:repeat(2,1fr);">
+          <div class="conf-am-tile" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--surface2);border:1px solid var(--stroke);cursor:pointer;"
             onclick="playVideoFullscreen(this)">
             <img class="am-thumb" src="aftermovie-ch2-thumb.png" alt="Chapter 2.0 Aftermovie"
               style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:opacity .35s ease;">
@@ -2023,7 +2105,7 @@ body:has(button:hover) #cursor{width:18px;height:18px}
 
   <div class="media-hero">
     <div class="media-hero-inner">
-      <button class="media-back-btn" onclick="history.back()">← Back</button>
+      <button class="media-back-btn" onclick="showPage('conferences')">← Back</button>
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">
         <span style="width:32px;height:1px;background:var(--stroke);display:block"></span>
         <span style="font-size:.65rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted)">Gallery</span>
@@ -2179,8 +2261,18 @@ animRing();
 
   function startLoad(){
     if(started) return; started=true;
-    wordTimer = setInterval(cycleWord, 900);
-    const duration = 2700;
+
+    // If refreshing to a non-home page, skip the loading screen instantly
+    const hash = window.location.hash.replace('#','');
+    const skipLoader = hash && ['chapter4','conferences','about','team','media'].includes(hash);
+    if(skipLoader){
+      screen.style.display='none';
+      initPage();
+      return;
+    }
+
+    wordTimer = setInterval(cycleWord, 550);
+    const duration = 1400;
     const start = performance.now();
     function step(now){
       const p = Math.min((now-start)/duration,1);
@@ -2192,8 +2284,8 @@ animRing();
         clearInterval(wordTimer);
         setTimeout(()=>{
           screen.classList.add('done');
-          setTimeout(()=>{screen.style.display='none'; initPage();},700);
-        },300);
+          setTimeout(()=>{screen.style.display='none'; initPage();},500);
+        },150);
       }
     }
     requestAnimationFrame(step);
@@ -2205,6 +2297,9 @@ animRing();
 
 /* ── Page routing ── */
 let currentPage = 'home';
+
+/* Valid page names — used to validate the hash on load */
+const VALID_PAGES = ['home','chapter4','conferences','about','team','media'];
 
 function showPage(name){
   // Reset reveal states on outgoing page so they re-animate next visit
@@ -2221,6 +2316,8 @@ function showPage(name){
   currentPage = name;
   const page = document.getElementById('page-'+name);
   page.classList.add('active');
+  // Persist page in URL hash so refresh restores the same page
+  history.replaceState(null, '', '#' + name);
   window.scrollTo(0,0);
   // Tag + observe scroll reveals
   setTimeout(function(){
@@ -2242,7 +2339,13 @@ function showPage(name){
 
 /* ── Page init (runs after loading screen) ── */
 function initPage(){
-  heroEntrance();
+  // Restore page from URL hash if present (so refresh keeps the user on the same page)
+  const hash = window.location.hash.replace('#','');
+  if(hash && VALID_PAGES.includes(hash) && hash !== 'home'){
+    showPage(hash);
+  } else {
+    heroEntrance();
+  }
   setupCountdown();
   setupRoles();
   setupScrollReveal();
@@ -2253,12 +2356,12 @@ function initPage(){
 /* ── Hero GSAP entrance ── */
 function heroEntrance(){
   const tl = gsap.timeline({defaults:{ease:'power3.out'}});
-  tl.to('#hero-eyebrow',{opacity:1,y:0,duration:.8,delay:.05})
-    .to('#hero-title',{opacity:1,y:0,duration:1.2},'-=.5')
-    .to('#hero-tag',{opacity:1,y:0,duration:.9},'-=.8')
-    .to('#hero-role',{opacity:1,y:0,duration:.8},'-=.6')
-    .to('#hero-chapter',{opacity:1,y:0,duration:.8},'-=.6')
-    .to('#hero-actions',{opacity:1,y:0,duration:.8},'-=.5');
+  tl.to('#hero-eyebrow',{opacity:1,y:0,duration:.45,delay:0})
+    .to('#hero-title',{opacity:1,y:0,duration:.7},'-=.3')
+    .to('#hero-tag',{opacity:1,y:0,duration:.5},'-=.45')
+    .to('#hero-role',{opacity:1,y:0,duration:.45},'-=.35')
+    .to('#hero-chapter',{opacity:1,y:0,duration:.45},'-=.35')
+    .to('#hero-actions',{opacity:1,y:0,duration:.45},'-=.3');
 }
 
 /* ── Role cycling ── */
@@ -2456,54 +2559,64 @@ function switchMediaTab(tabId){
   window.scrollTo(0,0);
 }
 
-/* ── Video: click to play fullscreen ── */
+/* ── Video: click to open in mini modal ── */
 function playVideoFullscreen(container) {
   var video = container.querySelector('video');
   if (!video) return;
 
-  // Unmute and play
-  video.muted = false;
-  video.currentTime = 0;
-  video.play();
-
-  // Hide the overlay and thumbnail
-  var overlays = container.querySelectorAll('.conf-video-overlay,.am-overlay,.ch3-am-overlay,.media-video-ph');
-  var thumbs   = container.querySelectorAll('.conf-video-thumb,.am-thumb,.ch3-am-thumb,.media-thumb');
-  overlays.forEach(function(el){ el.style.opacity = '0'; });
-  thumbs.forEach(function(el){ el.style.opacity = '0'; });
-
-  // Request fullscreen on the video element (cross-browser)
-  var req = video.requestFullscreen
-         || video.webkitRequestFullscreen
-         || video.mozRequestFullScreen
-         || video.msRequestFullscreen;
-  if (req) {
-    req.call(video).catch(function(){});
+  // Grab the source from the tile's video element
+  var src = video.currentSrc || video.src || '';
+  // Also try the <source> child if src is empty
+  if (!src) {
+    var srcEl = video.querySelector('source');
+    if (srcEl) src = srcEl.src;
   }
 
-  // When fullscreen exits, pause and restore thumbnail/overlay
-  function onFsChange() {
-    var fsEl = document.fullscreenElement
-            || document.webkitFullscreenElement
-            || document.mozFullScreenElement
-            || document.msFullscreenElement;
-    if (!fsEl) {
-      video.pause();
-      video.currentTime = 0;
-      video.muted = true;
-      overlays.forEach(function(el){ el.style.opacity = '1'; });
-      thumbs.forEach(function(el){ el.style.opacity = '1'; });
-      document.removeEventListener('fullscreenchange', onFsChange);
-      document.removeEventListener('webkitfullscreenchange', onFsChange);
-      document.removeEventListener('mozfullscreenchange', onFsChange);
-      document.removeEventListener('MSFullscreenChange', onFsChange);
-    }
-  }
-  document.addEventListener('fullscreenchange', onFsChange);
-  document.addEventListener('webkitfullscreenchange', onFsChange);
-  document.addEventListener('mozfullscreenchange', onFsChange);
-  document.addEventListener('MSFullscreenChange', onFsChange);
+  // Try to derive a friendly label from nearby text
+  var labelEl = container.querySelector('.conf-video-lbl,.am-label,.media-video-label,[class*="label"]');
+  var label   = labelEl ? labelEl.textContent.trim() : 'BharatMUN';
+
+  openVideoModal(src, label);
 }
+
+function openVideoModal(src, label) {
+  var modal    = document.getElementById('video-modal');
+  var vmVideo  = document.getElementById('vm-video');
+  var vmLabel  = document.getElementById('vm-label');
+
+  vmLabel.textContent = label || 'BharatMUN';
+
+  // Set source and play
+  vmVideo.src          = src;
+  vmVideo.muted        = false;
+  vmVideo.currentTime  = 0;
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  vmVideo.play().catch(function(){});
+}
+
+function closeVideoModal() {
+  var modal   = document.getElementById('video-modal');
+  var vmVideo = document.getElementById('vm-video');
+
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+
+  vmVideo.pause();
+  vmVideo.src = '';
+}
+
+// Close on backdrop click
+document.getElementById('video-modal').addEventListener('click', function(e){
+  if (e.target === this) closeVideoModal();
+});
+
+// Close on Escape key
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') closeVideoModal();
+});
 </script>
 </body>
 </html>
