@@ -15,6 +15,17 @@
   <div class="vm-box">
     <button class="vm-close" onclick="closeVideoModal()" aria-label="Close video">✕</button>
     <video id="vm-video" controls playsinline></video>
+    <div id="vm-iframe-wrap" style="display:none;width:100%;aspect-ratio:16/9;position:relative;overflow:hidden;background:#000;">
+      <iframe id="vm-iframe" src="" frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+        referrerpolicy="strict-origin-when-cross-origin"
+        style="position:absolute;inset:0;width:100%;height:100%;border:none;">
+      </iframe>
+      <div id="vm-controls" style="position:absolute;bottom:0;left:0;right:0;z-index:10;padding:10px 14px;background:linear-gradient(transparent,rgba(0,0,0,.7));display:flex;align-items:center;gap:12px;opacity:0;transition:opacity .25s;">
+        <button id="vm-playpause" onclick="vimeoTogglePlay()" style="background:none;border:none;color:#fff;font-size:1.2rem;cursor:pointer;line-height:1;padding:0;">⏸</button>
+        <input id="vm-vol" type="range" min="0" max="1" step="0.05" value="1" oninput="vimeoSetVolume(this.value)" style="width:80px;accent-color:var(--saffron);cursor:pointer;">
+      </div>
+    </div>
     <div class="vm-bar">
       <span class="vm-label" id="vm-label">BharatMUN</span>
       <span class="vm-hint">Press Esc to close</span>
@@ -2184,19 +2195,10 @@ body:has(button:hover) #cursor{width:18px;height:18px}
 </div>
       <div class="media-sec-label">Videos</div>
       <div class="media-video-grid" style="grid-template-columns:1fr;">
-        <div class="media-video-item" style="cursor:pointer;"
-          onclick="playVideoFullscreen(this)">
-          <!-- Static thumbnail — replace aftermovie-ch3-thumb.jpg with your actual thumbnail -->
-          <img class="ch3-am-thumb" src="aftermovie-ch3-thumb.png" alt="Chapter 3.0 Aftermovie Thumbnail"
-            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;transition:opacity .35s ease;">
-          <!-- Video — plays with audio on click -->
-          <video loop playsinline muted
+        <div class="media-video-item" style="cursor:pointer;" onclick="openVimeoModal()">
+          <img src="https://vumbnail.com/1196596652.jpg" alt="BharatMUN Chapter 3.0 Aftermovie"
             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;">
-            <source src="BharatMUN Chapter 3.0 - Aftermovie.mp4" type="video/mp4">
-          </video>
-          <!-- Play icon overlay (shown at rest, hidden on click) -->
-          <div class="ch3-am-overlay"
-            style="position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(9,9,9,.45);backdrop-filter:blur(2px);transition:opacity .35s ease;pointer-events:none;">
+          <div style="position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(9,9,9,.45);backdrop-filter:blur(2px);transition:opacity .35s ease;pointer-events:none;">
             <div class="media-play-icon" style="width:64px;height:64px;font-size:1.6rem;">▶</div>
           </div>
         </div>
@@ -2332,6 +2334,8 @@ function showPage(name){
         if(el){ gsap.set(el, {opacity:0, y:24}); }
       });
       heroEntrance();
+      // Re-attach scroll-reveal observer so below-hero sections animate in
+      setupScrollReveal();
     } else {
       setupScrollReveal();
       // Immediately trigger above-fold reveals (hero elements visible without scrolling)
@@ -2595,14 +2599,19 @@ function playVideoFullscreen(container) {
 function openVideoModal(src, label) {
   var modal    = document.getElementById('video-modal');
   var vmVideo  = document.getElementById('vm-video');
+  var vmIframe = document.getElementById('vm-iframe');
   var vmLabel  = document.getElementById('vm-label');
 
   vmLabel.textContent = label || 'BharatMUN';
 
-  // Set source and play
-  vmVideo.src          = src;
-  vmVideo.muted        = false;
-  vmVideo.currentTime  = 0;
+  // Show video, hide iframe
+  vmVideo.style.display  = '';
+  vmIframe.style.display = 'none';
+  vmIframe.src           = '';
+
+  vmVideo.src         = src;
+  vmVideo.muted       = false;
+  vmVideo.currentTime = 0;
 
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -2610,15 +2619,41 @@ function openVideoModal(src, label) {
   vmVideo.play().catch(function(){});
 }
 
+function openVimeoModal() {
+  var modal    = document.getElementById('video-modal');
+  var vmVideo  = document.getElementById('vm-video');
+  var vmIframe = document.getElementById('vm-iframe');
+  var vmWrap   = document.getElementById('vm-iframe-wrap');
+  var vmLabel  = document.getElementById('vm-label');
+
+  vmLabel.textContent = 'BharatMUN Chapter 3.0 – Aftermovie';
+
+  // Hide native video, show Vimeo iframe wrapper
+  vmVideo.pause();
+  vmVideo.style.display = 'none';
+  vmWrap.style.display  = 'block';   // ← was '' which fails to clear inline display:none
+  vimeoPlayer = null;
+  vmIframe.src = 'https://player.vimeo.com/video/1196596652?autoplay=1&badge=0&autopause=0&controls=0&title=0&byline=0&portrait=0&app_id=58479';
+  setTimeout(initVimeoPlayer, 800);
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
 function closeVideoModal() {
-  var modal   = document.getElementById('video-modal');
-  var vmVideo = document.getElementById('vm-video');
+  var modal    = document.getElementById('video-modal');
+  var vmVideo  = document.getElementById('vm-video');
+  var vmIframe = document.getElementById('vm-iframe');
+  var vmWrap   = document.getElementById('vm-iframe-wrap');
 
   modal.classList.remove('open');
   document.body.style.overflow = '';
 
   vmVideo.pause();
-  vmVideo.src = '';
+  vmVideo.src           = '';
+  vmIframe.src          = '';
+  vmWrap.style.display  = 'none';
+  vmVideo.style.display = 'block';
 }
 
 // Close on backdrop click
@@ -2630,6 +2665,33 @@ document.getElementById('video-modal').addEventListener('click', function(e){
 document.addEventListener('keydown', function(e){
   if (e.key === 'Escape') closeVideoModal();
 });
+</script>
+</body>
+</html><script src="https://player.vimeo.com/api/player.js"></script>
+<script>
+var vimeoPlayer = null;
+
+function initVimeoPlayer() {
+  var iframe = document.getElementById('vm-iframe');
+  var wrap   = document.getElementById('vm-iframe-wrap');
+  var ctrl   = document.getElementById('vm-controls');
+  if (typeof Vimeo === 'undefined' || !iframe.src) return;
+  vimeoPlayer = new Vimeo.Player(iframe);
+  vimeoPlayer.on('play',  function(){ document.getElementById('vm-playpause').textContent = '⏸'; });
+  vimeoPlayer.on('pause', function(){ document.getElementById('vm-playpause').textContent = '▶'; });
+  wrap.addEventListener('mouseenter', function(){ ctrl.style.opacity = '1'; });
+  wrap.addEventListener('mouseleave', function(){ ctrl.style.opacity = '0'; });
+}
+
+function vimeoTogglePlay() {
+  if (!vimeoPlayer) return;
+  vimeoPlayer.getPaused().then(function(paused){ paused ? vimeoPlayer.play() : vimeoPlayer.pause(); });
+}
+
+function vimeoSetVolume(v) {
+  if (!vimeoPlayer) return;
+  vimeoPlayer.setVolume(parseFloat(v));
+}
 </script>
 </body>
 </html>
