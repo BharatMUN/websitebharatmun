@@ -2325,9 +2325,16 @@ function showPage(name){
   window.scrollTo(0,0);
   // Tag + observe scroll reveals
   setTimeout(function(){
-    setupScrollReveal();
-    // Immediately trigger above-fold reveals (hero elements visible without scrolling)
-    if(name !== 'home'){
+    if(name === 'home'){
+      // Reset hero elements so GSAP entrance re-animates them
+      ['#hero-eyebrow','#hero-title','#hero-tag','#hero-role','#hero-chapter','#hero-actions'].forEach(function(sel){
+        const el = document.querySelector(sel);
+        if(el){ gsap.set(el, {opacity:0, y:24}); }
+      });
+      heroEntrance();
+    } else {
+      setupScrollReveal();
+      // Immediately trigger above-fold reveals (hero elements visible without scrolling)
       const vp = window.innerHeight;
       document.querySelectorAll('.page.active .reveal:not(.in)').forEach(function(el){
         const rect = el.getBoundingClientRect();
